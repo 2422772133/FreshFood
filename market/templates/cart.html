@@ -1,0 +1,104 @@
+{% extends 'base_no_cart.html' %}
+{% load static from staticfiles %}
+{% block title %}天天生鲜-购物车{% endblock title %}
+{% block body %}
+	<div class="total_count">全部商品<em>{{ total_count }}</em>件</div>
+	<ul class="cart_list_th clearfix">
+		<li class="col01">商品名称</li>
+		<li class="col02">商品单位</li>
+		<li class="col03">商品价格</li>
+		<li class="col04">数量</li>
+		<li class="col05">小计</li>
+		<li class="col06">操作</li>
+	</ul>
+    {% for sku in skus %}
+	<ul class="cart_list_td clearfix">
+		<li class="col01"><input type="checkbox" name="" checked></li>
+		<li class="col02"><img src="{{ sku.image.url }}"></li>
+		<li class="col03">{{ sku.name }}<br><em>{{ sku.price }}元/{{ sku.unite }}</em></li>
+		<li class="col04">{{ sku.unite }}</li>
+		<li class="col05">{{ sku.price }}元</li>
+		<li class="col06">
+			<div class="num_add">
+				<a href="javascript:;" class="add fl">+</a>
+				<input type="text" class="num_show fl" value="{{ sku.count }}">
+				<a href="javascript:;" class="minus fl">-</a>	
+			</div>
+		</li>
+		<li class="col07">{{ sku.amount }}元</li>
+		<li class="col08"><a href="javascript:;">删除</a></li>
+	</ul>
+    {% endfor %}
+	
+
+	<ul class="settlements">
+		<li class="col01"><input type="checkbox" name="" checked=""></li>
+		<li class="col02">全选</li>
+		<li class="col03">合计(不含运费)：<span>¥</span><em>{{ total_amount }}</em><br>共计<b>{{ total_count }}</b>件商品</li>
+		<li class="col04"><a href="place_order.html">去结算</a></li>
+	</ul>
+{% endblock body %}
+{% block bottomfiles %}
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script>
+    // 计算被选中商品的总件数和总价格
+    function update_page_info() {
+        var total_count = 0
+        var total_amount = 0
+        // 获取所有被选中的商品对应的ul元素
+        $('.cart_list_td').find(':checked').parents('ul').each(function () {
+            // $(this) -> 被选中的商品的ul元素
+            // 获取商品的数目和小计
+            var count = $(this).find('.num_show').val()
+            var amount = $(this).children('.col07').text()
+
+            // 累加计算被选中的商品的总件数和总价格
+            total_count += parseInt(count)
+            total_amount += parseFloat(amount)
+        })
+
+        // 设置被选中的商品的总件数和总价格
+        $('.settlements').find('em').text(total_amount)
+        $('.settlements').find('b').text(total_count)
+    }
+
+    // 全选和全不选
+    $('.settlements').find(':checkbox').change(function () {
+        // 获取全选checkbox的选中状态
+        // $(this) -> 全选的checkbox checked
+        var is_checked = $(this).prop('checked')
+        // alert(is_checked)
+
+        // 遍历设置商品的checkbox的选中状态和全选checkbox的状态一致
+        $('.cart_list_td').find(':checkbox').each(function () {
+            // $(this) -> 每个商品对应的checkbox
+            $(this).prop('checked', is_checked)
+        })
+
+        // 更新被选中商品的总件数和总价格
+        update_page_info()
+    })
+
+    // 商品的checkbox状态发生改变时，全选checkbox状态改变
+    $('.cart_list_td').find(':checkbox').change(function () {
+        // 获取所有商品的checkbox的数目
+        var all_len = $('.cart_list_td').find(':checkbox').length
+        // 获取被选中的商品的checkbox的数目
+        var checked_len = $('.cart_list_td').find(':checked').length
+
+        // alert(all_len+':'+checked_len)
+        // 比较判断
+        var is_checked = true
+        if (checked_len < all_len) {
+            is_checked = false
+        }
+
+        // 设置全选checkbox的选中状态
+        $('.settlements').find(':checkbox').prop('checked', is_checked)
+
+        // 更新被选中商品的总件数和总价格
+        update_page_info()
+    })
+
+    </script>
+{% endblock bottomfiles %}

@@ -1,0 +1,250 @@
+{#{% extends 'market/base.html' %}#}
+{#{% load static from staticfiles %}#}
+{#{% block title %}天天生鲜-首页{% endblock title %}#}
+{#{% block topfiles %}#}
+{#    <script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>#}
+{#    <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>#}
+{#    <script type="text/javascript" src="{% static 'js/slide.js' %}"></script>#}
+{#{% endblock topfiles %}#}
+{#{% block body %}#}
+{#	<div class="header_con">#}
+{#		<div class="header">#}
+{#			<div class="welcome fl">欢迎来到天天生鲜!</div>#}
+{#			<div class="fr">#}
+{#                {% if user.is_authenticated %}#}
+{#				<div class="login_btn fl">#}
+{#					欢迎您：<em>{{ user.username }}</em>#}
+{#                    <span>|</span>#}
+{#					<a href="{% url 'user:logout' %}">退出</a>#}
+{#				</div>#}
+{#                {% else %}#}
+{#				<div class="login_btn fl">#}
+{#					<a href="{% url 'user:login' %}">登录</a>#}
+{#					<span>|</span>#}
+{#					<a href="{% url 'user:register' %}">注册</a>#}
+{#				</div>#}
+{#                {% endif %}#}
+{#				<div class="login_info fl">#}
+{#					欢迎您：<em>张 山</em>#}
+{#				</div>#}
+{#				<div class="login_btn fl">#}
+{#					<a href="login.html">登录</a>#}
+{#					<span>|</span>#}
+{#					<a href="register.html">注册</a>#}
+{#				</div>#}
+{#				<div class="user_link fl">#}
+{#					<span>|</span>#}
+{#					<a href="user_center_info.html">用户中心</a>#}
+{#					<span>|</span>#}
+{#					<a href="cart.html">我的购物车</a>#}
+{#					<span>|</span>#}
+{#					<a href="user_center_order.html">我的订单</a>#}
+{#				</div>#}
+{#			</div>#}
+{#		</div>		#}
+{#	</div>#}
+{##}
+{#	<div class="search_bar clearfix">#}
+{#		<a href="index.html" class="logo fl"><img src="{% static 'images/logo.png' %}"></a>#}
+{#		<div class="search_con fl">#}
+{#			<input type="text" class="input_text fl" name="" placeholder="搜索商品">#}
+{#			<input type="button" class="input_btn fr" name="" value="搜索">#}
+{#		</div>#}
+{#		<div class="guest_cart fr">#}
+{#			<a href="#" class="cart_name fl">我的购物车</a>#}
+{#			<div class="goods_count fl" id="show_count">1</div>#}
+{#		</div>#}
+{#	</div>#}
+{##}
+{#	<div class="navbar_con">#}
+{#		<div class="navbar">#}
+{#			<h1 class="fl">全部商品分类</h1>#}
+{#			<ul class="navlist fl">#}
+{#				<li><a href="">首页</a></li>#}
+{#				<li class="interval">|</li>#}
+{#				<li><a href="">手机生鲜</a></li>#}
+{#				<li class="interval">|</li>#}
+{#				<li><a href="">抽奖</a></li>#}
+{#			</ul>#}
+{#		</div>#}
+{#	</div>#}
+{##}
+{#	<div class="center_con clearfix">#}
+{#		<ul class="subnav fl">#}
+{#          商品种类信息  #}
+{#            {% for type in types %}#}
+{#			    <li><a href="#model0{{ forloop.counter }}" class="{{ type.logo }}">{{ type.name }}</a></li>#}
+{#		    {% endfor %}#}
+{#        </ul>#}
+{#		<div class="slide fl">#}
+{#			<ul class="slide_pics">#}
+                {#页轮播商品信息#}
+{#                {% for banner in index_banner %}#}
+{#                    <li><a href="#"><img src="{{ banner.image.url }}" alt="幻灯片"></a></li>#}
+{#                {% endfor %}#}
+{#			</ul>#}
+{#			<div class="prev"></div>#}
+{#			<div class="next"></div>#}
+{#			<ul class="points"></ul>#}
+{#		</div>#}
+{#		<div class="adv fl">#}
+{#            商品促销信息#}
+{#            {% for promotion in promotion_banner %}#}
+{#			<a href="{{ promotion.url }}"><img src="{{ promotion.image.url }}"></a>#}
+{#            {% endfor %}#}
+{#            {% for banner in promotion_banner %}#}
+{#			<a href="{{ banner.url }}"><img src="{{ banner.image.url }}"></a>#}
+{#            {% endfor %}#}
+{##}
+{#		</div>#}
+{#	</div>#}
+{# {% for type in types %}#}
+{#	<div class="list_model">#}
+{#		<div class="list_title clearfix">#}
+{#			<h3 class="fl" id="model0{{ forloop.counter }}">{{ type.name }}</h3>#}
+{#			<div class="subtitle fl">#}
+{#				<span>|</span>#}
+                {# 展示type种类的首页展示的文字商品的信息 #}
+{#                {% for banner in type.title_banner %}#}
+{#				<a href="#">{{ banner.sku.name }}</a>#}
+{#				{% endfor %}#}
+{#			</div>#}
+{#			<a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>#}
+{#		</div>#}
+{##}
+{#		<div class="goods_con clearfix">#}
+{#			<div class="goods_banner fl"><img src="{{ type.image.url }}"></div>#}
+{#			<ul class="goods_list fl">#}
+                {# 展示type种类首页展示的图片商品的信息 #}
+{#                {% for banner in type.image_banner %}#}
+{#				<li>#}
+{#					<h4><a href="#">{{ banner.sku.name }}</a></h4>#}
+{#					<a href="#"><img src="{{ banner.sku.image.url }}"></a>#}
+{#					<div class="prize">¥ {{ banner.sku.price }}</div>#}
+{#				</li>#}
+{#                {% endfor %}#}
+{#			</ul>#}
+{#		</div>#}
+{#	</div>#}
+{#    {% endfor %}#}
+{#{% endblock body %}#}
+{#{% block bottomfiles %}#}
+{#	<script type="text/javascript" src="js/slideshow.js"></script>#}
+{#	<script type="text/javascript">#}
+{#		BCSlideshow('focuspic');#}
+{#		var oFruit = document.getElementById('fruit_more');#}
+{#		var oShownum = document.getElementById('show_count');#}
+{##}
+{#		var hasorder = localStorage.getItem('order_finish');#}
+{##}
+{#		if(hasorder)#}
+{#		{#}
+{#			oShownum.innerHTML = '2';#}
+{#		}#}
+{##}
+{#		oFruit.onclick = function(){#}
+{#			window.location.href = 'list.html';#}
+{#		}#}
+{#	</script>#}
+{#{% endblock bottomfiles %}#}
+
+
+
+{% extends 'market/base.html' %}
+{% load static from staticfiles %}
+{% block title %}天天生鲜-首页{% endblock title %}
+{% block topfiles %}
+	<script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/slide.js' %}"></script>
+{% endblock topfiles %}
+
+{% block body %}
+	<div class="navbar_con">
+		<div class="navbar">
+			<h1 class="fl">全部商品分类</h1>
+			<ul class="navlist fl">
+				<li><a href="">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="">手机生鲜</a></li>
+				<li class="interval">|</li>
+				<li><a href="">抽奖</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="center_con clearfix">
+		<ul class="subnav fl">
+            {# 展示商品种类的信息 #}
+            {% for type in types %}
+			<li><a href="#model0{{ forloop.counter }}" class="{{ type.logo }}">{{ type.name }}</a></li>
+            {% endfor %}
+		</ul>
+		<div class="slide fl">
+			<ul class="slide_pics">
+                {# 展示首页轮播商品的信息 #}
+                {% for banner in index_banner %}
+				<li><a href="#model0{{ forloop.counter }}"><img src="{{ banner.image.url }}" alt="幻灯片"></a></li>
+				{% endfor %}
+			</ul>
+			<div class="prev"></div>
+			<div class="next"></div>
+			<ul class="points"></ul>
+		</div>
+		<div class="adv fl">
+            {# 展示首页促销活动信息 #}
+            {% for banner in promotion_banner %}
+			<a href="{{ banner.url }}"><img src="{{ banner.image.url }}"></a>
+            {% endfor %}
+		</div>
+	</div>
+
+    {% for type in types %}
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model0{{ forloop.counter }}">{{ type.name }}</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+                {# 展示type种类的首页展示的文字商品的信息 #}
+                {% for banner in type.title_banner %}
+				<a href="{% url 'goods:detail' banner.sku.id %}">{{ banner.sku.name }}</a>
+				{% endfor %}
+			</div>
+			<a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="{{ type.image.url }}"></div>
+			<ul class="goods_list fl">
+                {# 展示type种类首页展示的图片商品的信息 #}
+                {% for banner in type.image_banner %}
+				<li>
+					<h4><a href="{% url 'goods:detail' banner.sku.id %}">{{ banner.sku.name }}</a></h4>
+					<a href="{% url 'goods:detail' banner.sku.id %}"><img src="{{ banner.sku.image.url }}"></a>
+					<div class="prize">¥ {{ banner.sku.price }}</div>
+				</li>
+                {% endfor %}
+			</ul>
+		</div>
+	</div>
+    {% endfor %}
+{% endblock body %}
+                                                                                                                                                                                                                                                                                                                            {#{% block bottomfiles %}#}
+{#	<script type="text/javascript" src="{% static 'js/slide.js' %}"></script>#}
+{#	<script type="text/javascript">#}
+{#		BCSlideshow('focuspic');#}
+{#		var oFruit = document.getElementById('fruit_more');#}
+{#		var oShownum = document.getElementById('show_count');#}
+{##}
+{#		var hasorder = localStorage.getItem('order_finish');#}
+{##}
+{#		if(hasorder)#}
+{#		{#}
+{#			oShownum.innerHTML = '2';#}
+{#		}#}
+{##}
+{#		oFruit.onclick = function(){#}
+{#			window.location.href = 'list.html';#}
+{#		}#}
+{#	</script>#}
+{#{% endblock bottomfiles %}#}
